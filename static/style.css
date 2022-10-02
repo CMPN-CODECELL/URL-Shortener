@@ -1,0 +1,132 @@
+ @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+h1{
+  color: white;
+}
+li,a,button{
+  font-family: 'Lilita one',cursive;
+  font-weight: 500;
+  font-size: 110%;
+  color: white;
+  text-decoration: none;
+}
+header{
+  background-color: black;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 30px 5%;
+}
+#activee a{
+  color: #777;
+  text-decoration: underline;
+}
+.logo{
+  cursor: pointer;
+  margin-right: auto;
+  font-size: 220%;
+}
+.logo:hover{
+  text-decoration: underline;
+  color: #aaa;
+  opacity: 0.5;
+}
+
+.nav_links{
+  list-style: none;
+}
+
+.nav_links li{
+  display: inline-block;
+  padding: 0px 80px;
+}
+
+.nav_links li a{
+  transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover,.active{
+  color: #777;
+  text-decoration: underline;
+}
+.nav_links li .active:hover{
+  color: #777;
+  text-decoration: none;
+}
+
+.button{
+  margin-left: 80px;
+  padding: 5% 10%;
+  background-color: #333;
+  border: none;
+  border-radius: 4%;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;  
+}
+
+.button:hover{
+  background-color: #666;
+  color: black;
+}
+/* body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: black;
+  background-size: cover;
+}*/
+.login-box{
+  width: 100vh;
+  position: absolute;
+  top: 55%;
+  left: 55%;
+  transform: translate(-50%,-50%);
+  color: white;
+}
+.login-box h1{
+  float:left;
+  text-align: center;
+  font-size: 40px;
+  border-bottom: 6px solid #FFFFFF;
+  margin-bottom: 50px;
+  padding: 10px 0;
+}
+.textbox{
+  width: 80%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  margin: 8px 0;
+  border-bottom: 1px solid #FFFFFF;
+}
+.textbox i{
+  width: 5%;
+  float: left;
+  text-align: center;
+}
+.textbox input{
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  font-size: 18px;
+  width: 50%;
+  float: left;
+  margin: 0 10px;
+}
+.btn{
+  width: 40%;
+  background: none;
+  border: 2px solid #FFFFFF;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
+} 
