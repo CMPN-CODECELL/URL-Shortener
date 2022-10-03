@@ -160,6 +160,10 @@ def editProfile():
         else:
             return "<h1>Passwords don't match.</h1>"
     return render_template('pages/profile.html',r=r,username=username)
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    return redirect(url_for('.index'))
     
 if __name__ == "__main__":
     from waitress import serve
