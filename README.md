@@ -30,6 +30,8 @@ Install the required modules
 
     pip install -r requirements.txt
 
+###### You will also need to setup a localhost MySQL database
+
 ## How to run the project
 <!--Remove the below lines and add yours -->
 Steps:
