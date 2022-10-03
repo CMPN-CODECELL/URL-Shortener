@@ -1,14 +1,28 @@
+from distutils.log import debug
 from flask import Flask, render_template,request,session,redirect,url_for,g
 from pyshorteners import *
 import mysql.connector
+from settings import DEBUG, SECRET_KEY, DB_PASSWORD
 
 shortener = Shortener()
 
 app = Flask(__name__)
 
-app.secret_key="japneet"
+app.secret_key=SECRET_KEY
 
-@app.route('/')
+def init():
+    mydb=mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password=DB_PASSWORD,
+        database="database_name"
+    )
+    mycursor = mydb.cursor()
+    return mycursor, mydb 
+mycursor, mydb = init()
+    
+
+@app.route('/', methods=['GET'])
 def index():
     return render_template('pages/urlShortener.html')
 
@@ -18,13 +32,6 @@ def beforeLogin():
 
 @app.route('/login',methods=['POST','GET'])
 def login():
-    mydb=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="username"
-    )
-    mycursor = mydb.cursor()
     if request.method=='POST':
         signup=request.form
         name = signup['name']
@@ -42,17 +49,10 @@ def login():
         return render_template('pages/urlShortener.html')
     else:
         return render_template('pages/urlShortener.html')
-    mycursor.close()
+    
     
 @app.route('/urlShortener',methods=['POST','GET'])
 def urlShortener():
-    mydb=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="username"
-    )
-    mycursor = mydb.cursor()
     if request.method=='POST':
         signnup=request.form
         username = signnup['Username']
@@ -68,18 +68,10 @@ def urlShortener():
             return "You are not a member please <a href='/beforeRegister'>register</a>"
     else:
         return render_template('pages/url.html')
-    mydb.commit()
-    mycursor.close()
+    
     
 @app.route('/url',methods=['POST','GET'])
 def url():
-    mydb=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="username"
-    )
-    mycursor = mydb.cursor()
     if request.method=='POST':
         result=request.form.to_dict()
         urll = result['Url']
@@ -96,13 +88,6 @@ def url():
 
 @app.route('/history')
 def history():
-    mydb=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="username"
-    )
-    mycursor = mydb.cursor()
     mycursor.execute("select * from link")
     r=mycursor.fetchall()
     username = session['username']
@@ -115,13 +100,6 @@ def beforeEditProfile():
     
 @app.route('/profile')
 def profile():
-    mydb=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="username"
-    )
-    mycursor = mydb.cursor()
     username = session['username']
     mycursor.execute("select * from users where Username='"+username+"'")
     r=mycursor.fetchone()
@@ -131,13 +109,6 @@ def profile():
 
 @app.route('/editProfile',methods=['POST','GET'])
 def editProfile():
-    mydb=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="username"
-    )
-    mycursor = mydb.cursor()
     usernamee = session['username']
     mycursor.execute("select * from users where Username='"+usernamee+"'")
     r=mycursor.fetchone()
@@ -153,8 +124,8 @@ def editProfile():
             if oldPassw == r[3]:
                 mycursor.execute("UPDATE `users` SET `Name`=%s,`Username`=%s,`Email`=%s,`Password`=%s,`ConfirmPassword`=%s WHERE Username=%s",(name,username,email,newPassw,rpassw,usernamee))
                 mydb.commit()
-                return render_template('pages/profile.html',r=r,username=username)
                 session['username']=usernamee
+                return render_template('pages/profile.html',r=r,username=username)
             else:
                 return "<h1>Old Password entered is incorrect.</h1>"
         else:
@@ -167,6 +138,6 @@ def logout():
     
 if __name__ == "__main__":
     from waitress import serve
-    serve(app, host="127.0.0.1", port=5000)
+    serve(app, debug=DEBUG,host="127.0.0.1", port=5000)
          
         
