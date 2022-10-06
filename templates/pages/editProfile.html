@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="/static/style.css">
     <style>
       body{
           margin: 0px;
@@ -57,6 +58,13 @@
     </script>
   </head>
   <body>
+    <div>
+      <label class="switch">
+        <input type="checkbox" onclick="lightMode()"/>
+        <span class="slider" ></span>
+        <span class="themeText">Switch Theme</span>
+      </label>
+    </div>
     <header>
       <h1 class="logo"><a href="/urlShortener">URL Shortener</a></h1>
         <nav>
@@ -112,4 +120,15 @@
       <!-- <button onclick="window.location = 'http://localhost:5000/login'">Login now</button> -->
     </form>
   </body>
+  <script>
+    function darkMode() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+    function lightMode(){
+      var light = document.body;
+      light.classList.toggle("light-mode");
+    }
+  
+  </script>
 </html>
