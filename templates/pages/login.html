@@ -5,8 +5,16 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="/static/style.css">
   </head>
   <body>
+    <div>
+      <label class="switch">
+        <input type="checkbox" onclick="darkMode()"/>
+        <span class="slider" ></span>
+        <span class="themeText">Switch Theme</span>
+      </label>
+    </div>
 <form class="login-box"  action="/login" method="post">
   <h1>Register Page</h1>
   <div class="textbox">
@@ -45,4 +53,15 @@
   <!-- <button onclick="window.location = 'http://localhost:5000/login'">Login now</button> -->
 </form>
   </body>
+  <script>
+    function darkMode() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+    function lightMode(){
+      var light = document.body;
+      light.classList.toggle("light-mode");
+    }
+  
+  </script>
 </html>
