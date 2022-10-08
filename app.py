@@ -88,9 +88,9 @@ def url():
 
 @app.route('/history')
 def history():
-    mycursor.execute("select * from link")
-    r=mycursor.fetchall()
     username = session['username']
+    mycursor.execute("select * from link where Username='"+username+"'")
+    r=mycursor.fetchall()
     len1 = len(r)
     return render_template('pages/history.html',r=r,len1=len1,username=username)
 
